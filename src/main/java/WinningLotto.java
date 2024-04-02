@@ -15,4 +15,8 @@ public class WinningLotto {
             throw new IllegalArgumentException("보너스 번호는 로또 번호와 중복될 수 없습니다.");
         }
     }
+
+    public long calculatePrize(LottoTicket lottoTicket) {
+        return winningLottoTicket.compare(lottoTicket);
+    }
 }

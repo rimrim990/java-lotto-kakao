@@ -35,4 +35,10 @@ public class LottoTicket {
     public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
+
+    public long compare(LottoTicket other) {
+        return lottoNumbers.stream()
+            .filter(other.lottoNumbers::contains)
+            .count();
+    }
 }
