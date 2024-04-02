@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.NumberGenerator;
 import java.util.HashSet;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

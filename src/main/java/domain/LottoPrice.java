@@ -1,3 +1,5 @@
+package domain;
+
 public enum LottoPrice {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),
@@ -24,5 +26,9 @@ public enum LottoPrice {
         }
 
         return this.count == count;
+    }
+
+    public int getPrice(){
+        return price;
     }
 }

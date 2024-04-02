@@ -1,6 +1,10 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import domain.LottoNumber;
+import domain.LottoPrice;
+import domain.LottoTicket;
+import domain.WinningLotto;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
