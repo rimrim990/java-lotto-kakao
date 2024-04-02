@@ -6,6 +6,8 @@ public enum LottoPrice {
     FIFTH(3, false, 5_000),
     NOTHING(0, false, 0);
 
+    private static final int BONUS_RANK = 5;
+
     private long count;
     private boolean bonus;
     private int price;
@@ -17,6 +19,10 @@ public enum LottoPrice {
     }
 
     public boolean matchPrice(long count, boolean bonus) {
-        return this.count == count && this.bonus == bonus;
+        if (count == BONUS_RANK) {
+            return this.count == count && this.bonus == bonus;
+        }
+
+        return this.count == count;
     }
 }

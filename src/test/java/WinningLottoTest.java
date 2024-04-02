@@ -27,6 +27,17 @@ public class WinningLottoTest {
     }
 
     @Test
+    void 일치하는_로또번호_계산_2() {
+        LottoTicket winningLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusNumber);
+
+        LottoPrice lottoPrice = winningLotto.calculatePrize(
+            new LottoTicket(List.of(1, 2, 3, 4, 7, 8)));
+        assertThat(lottoPrice).isEqualTo(LottoPrice.FOURTH);
+    }
+
+    @Test
     void 불일치하는_로또번호_계산() {
         LottoTicket winningLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);

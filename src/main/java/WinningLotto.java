@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 public class WinningLotto {
 
-    private LottoTicket winningLottoTicket;
-    private LottoNumber bonusNumber;
+    private final LottoTicket winningLottoTicket;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         validateNotDuplicated(winningLottoTicket, bonusNumber);
@@ -21,6 +21,7 @@ public class WinningLotto {
     public LottoPrice calculatePrize(LottoTicket lottoTicket) {
         long matchCount = winningLottoTicket.compare(lottoTicket);
         boolean isBonusMatch = lottoTicket.contains(bonusNumber);
+
         return Arrays.stream(LottoPrice.values())
             .filter(lottoPrice -> lottoPrice.matchPrice(matchCount, isBonusMatch))
             .findAny()
