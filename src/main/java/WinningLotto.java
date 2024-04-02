@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class WinningLotto {
 
     private LottoTicket winningLottoTicket;
@@ -16,7 +18,12 @@ public class WinningLotto {
         }
     }
 
-    public long calculatePrize(LottoTicket lottoTicket) {
-        return winningLottoTicket.compare(lottoTicket);
+    public LottoPrice calculatePrize(LottoTicket lottoTicket) {
+        long matchCount = winningLottoTicket.compare(lottoTicket);
+        boolean isBonusMatch = lottoTicket.contains(bonusNumber);
+        return Arrays.stream(LottoPrice.values())
+            .filter(lottoPrice -> lottoPrice.matchPrice(matchCount, isBonusMatch))
+            .findAny()
+            .orElse(LottoPrice.NOTHING);
     }
 }

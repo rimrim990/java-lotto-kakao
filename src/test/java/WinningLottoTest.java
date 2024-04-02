@@ -21,7 +21,19 @@ public class WinningLottoTest {
         LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusNumber);
 
-        long prize = winningLotto.calculatePrize(new LottoTicket(List.of(1, 2, 3, 11, 12, 13)));
-        assertThat(prize).isEqualTo(3);
+        LottoPrice lottoPrice = winningLotto.calculatePrize(
+            new LottoTicket(List.of(1, 2, 3, 11, 12, 13)));
+        assertThat(lottoPrice).isEqualTo(LottoPrice.FIFTH);
+    }
+
+    @Test
+    void 불일치하는_로또번호_계산() {
+        LottoTicket winningLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusNumber);
+
+        LottoPrice lottoPrice = winningLotto.calculatePrize(
+            new LottoTicket(List.of(1, 2, 11, 12, 13, 14)));
+        assertThat(lottoPrice).isEqualTo(LottoPrice.NOTHING);
     }
 }
