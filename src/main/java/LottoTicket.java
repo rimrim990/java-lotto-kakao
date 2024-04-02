@@ -31,4 +31,8 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
+
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
 }
