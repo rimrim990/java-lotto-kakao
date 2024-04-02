@@ -31,4 +31,8 @@ public enum LottoPrice {
     public int getPrice(){
         return price;
     }
+
+    public long getCount(){
+        return count;
+    }
 }
