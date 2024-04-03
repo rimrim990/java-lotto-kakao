@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -12,6 +13,12 @@ public class WinningLotto {
 
         this.winningLottoTicket = winningLottoTicket;
         this.bonusNumber = bonusNumber;
+    }
+
+    public WinningLotto(String winningNumbers, int bonusBall) {
+        this(new LottoTicket(Arrays.stream(winningNumbers.split(", "))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList())), new LottoNumber(bonusBall));
     }
 
     private void validateNotDuplicated(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {

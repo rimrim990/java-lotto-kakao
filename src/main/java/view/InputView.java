@@ -11,6 +11,6 @@ public class InputView {
     }
 
     public String inputString() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

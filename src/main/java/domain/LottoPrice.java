@@ -10,9 +10,9 @@ public enum LottoPrice {
 
     private static final int BONUS_RANK = 5;
 
-    private long count;
-    private boolean bonus;
-    private int price;
+    private final long count;
+    private final boolean bonus;
+    private final int price;
 
     LottoPrice(long count, boolean bonus, int price) {
         this.count = count;
@@ -34,5 +34,9 @@ public enum LottoPrice {
 
     public long getCount(){
         return count;
+    }
+
+    public boolean isGreaterThan(long count) {
+        return this.count > count;
     }
 }

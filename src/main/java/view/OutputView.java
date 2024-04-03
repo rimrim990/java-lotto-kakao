@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoPrice;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,15 +17,17 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void printLottoNumbers(List<List<Integer>> lottoNumbers) {
-        for (List<Integer> lottoNumber : lottoNumbers) {
-            String lottoNumberString = lottoNumber.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-
-            System.out.println("[" + lottoNumberString + "]");
-        }
+    public void printUserLottos(List<List<Integer>> userLottos) {
+        userLottos.forEach(this::printLottoNumbers);
         System.out.println();
+    }
+
+    private void printLottoNumbers(List<Integer> lottoNumbers) {
+        String lottoNumberString = lottoNumbers.stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(", "));
+
+        System.out.println("[" + lottoNumberString + "]");
     }
 
     public void printWinningNumbersGuide() {
@@ -40,7 +43,8 @@ public class OutputView {
         System.out.println("---------");
 
         Arrays.stream(LottoPrice.values())
-            .filter(lottoPrice -> lottoPrice.getCount() > 0)
+            .filter(lottoPrice -> lottoPrice.isGreaterThan(0))
+            .sorted(Comparator.comparingInt(LottoPrice::getPrice))
             .forEach(lottoPrice -> printStatic(lottoPriceCount, lottoPrice));
     }
 
@@ -51,7 +55,9 @@ public class OutputView {
             sb.append(", 보너스 볼 일치");
         }
 
-        sb.append("(%d원) - %d개", lottoPrice.getPrice(), lottoPriceCount.getOrDefault(lottoPrice, 0));
+        sb.append("(").append(lottoPrice.getPrice()).append("원) - ")
+            .append(lottoPriceCount.getOrDefault(lottoPrice, 0)).append("개");
+
         System.out.println(sb);
     }
 
