@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class LottoNumberGeneratorTest {
 
     @Test
-    void 랜덤_로또번호_생성(){
+    void 랜덤_로또번호_생성() {
         NumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         List<Integer> result = lottoNumberGenerator.generateNumbers();
 

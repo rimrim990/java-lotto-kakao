@@ -44,7 +44,7 @@ public class LottoTicket {
             .count();
     }
 
-    public List<Integer> getLottoNumbers(){
+    public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
             .map(LottoNumber::getValue)
             .collect(Collectors.toList());

@@ -17,8 +17,8 @@ public class WinningLotto {
 
     public WinningLotto(String winningNumbers, int bonusBall) {
         this(new LottoTicket(Arrays.stream(winningNumbers.split(", "))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList())), new LottoNumber(bonusBall));
+                .map(Integer::parseInt)
+                .collect(Collectors.toList())), new LottoNumber(bonusBall));
     }
 
     private void validateNotDuplicated(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {

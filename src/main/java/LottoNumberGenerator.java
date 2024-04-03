@@ -15,7 +15,9 @@ public class LottoNumberGenerator implements NumberGenerator {
         List<Integer> numbers = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
             .boxed()
             .collect(Collectors.toList());
+
         Collections.shuffle(numbers);
+
         return numbers.subList(0, NUMBER_SIZE);
     }
 }

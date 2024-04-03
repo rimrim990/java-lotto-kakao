@@ -28,11 +28,11 @@ public enum LottoPrice {
         return this.count == count;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return price;
     }
 
-    public long getCount(){
+    public long getCount() {
         return count;
     }
 
