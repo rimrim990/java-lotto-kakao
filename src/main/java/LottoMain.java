@@ -1,6 +1,7 @@
 import domain.LottoGame;
 import domain.LottoStore;
 import domain.LottoTicket;
+import domain.Money;
 import domain.WinningLotto;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class LottoMain {
 
     private static List<LottoTicket> buyLottos() {
         outputView.printGameGuide();
-        int money = inputView.inputInt();
+        Money money = new Money(inputView.inputInt());
         inputView.inputString();
 
         LottoStore lottoStore = new LottoStore(money);

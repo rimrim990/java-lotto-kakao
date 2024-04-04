@@ -10,8 +10,8 @@ public class LottoStore {
 
     private final int lottoCount;
 
-    public LottoStore(int money) {
-        this.lottoCount = money / LOTTO_PRICE;
+    public LottoStore(Money money) {
+        this.lottoCount = (int) money.divide(LOTTO_PRICE);
     }
 
     public int getLottoCount() {
