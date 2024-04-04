@@ -28,11 +28,15 @@ public class LottoGame {
     }
 
     public float calculateRevenue() {
-        int revenue = lottoResult.entrySet()
+        int income = calculateTotalIncome();
+        int used = LOTTO_PRICE * lottoTickets.size();
+        return (float) income / used;
+    }
+
+    private int calculateTotalIncome() {
+        return lottoResult.entrySet()
             .stream()
             .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
             .sum();
-
-        return (float) revenue / (LOTTO_PRICE * lottoTickets.size());
     }
 }
