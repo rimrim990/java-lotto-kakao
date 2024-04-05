@@ -19,7 +19,15 @@ public class Money {
 
     public Money buy(Money price, Quantity quantity) {
         long used = price.value * quantity.getValue();
+        validateRemainMoney(used);
+
         return new Money(this.value - used);
+    }
+
+    private void validateRemainMoney(long need) {
+        if (this.value < need) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
     }
 
     public Quantity calculatePurchaseQuantity(Money price) {
