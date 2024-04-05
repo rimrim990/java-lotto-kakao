@@ -15,13 +15,13 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore(new Money(14_000));
 
         assertThat(lottoStore.getLottoCount()).isEqualTo(14);
-        assertThat(lottoStore.getLottoTickets(new LottoNumberGenerator())).hasSize(14);
+        assertThat(lottoStore.generateAutoLottos(new LottoNumberGenerator())).hasSize(14);
     }
 
     @Test
     void 자동로또_발권() {
         LottoStore lottoStore = new LottoStore(new Money(1_000));
-        List<LottoTicket> lottoTickets = lottoStore.getLottoTickets(
+        List<LottoTicket> lottoTickets = lottoStore.generateAutoLottos(
             () -> List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTickets).hasSize(1);

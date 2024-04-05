@@ -2,6 +2,7 @@ import domain.LottoGame;
 import domain.LottoStore;
 import domain.LottoTicket;
 import domain.Money;
+import domain.Quantity;
 import domain.WinningLotto;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class LottoMain {
         LottoStore lottoStore = new LottoStore(money);
         outputView.printLottoCount(lottoStore.getLottoCount());
 
-        return lottoStore.getLottoTickets(new LottoNumberGenerator());
+        return lottoStore.generateAutoLottos(new LottoNumberGenerator());
     }
 
     private static void noticeResult(WinningLotto winningLotto, List<LottoTicket> lottoTickets) {

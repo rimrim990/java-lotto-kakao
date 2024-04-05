@@ -18,7 +18,7 @@ public class LottoStore {
         return lottoCount.getValue();
     }
 
-    public List<LottoTicket> getLottoTickets(NumberGenerator numberGenerator) {
+    public List<LottoTicket> generateAutoLottos(NumberGenerator numberGenerator) {
         return LongStream.range(0, lottoCount.getValue())
             .mapToObj(number -> new LottoTicket(numberGenerator.generateNumbers()))
             .collect(Collectors.toList());
