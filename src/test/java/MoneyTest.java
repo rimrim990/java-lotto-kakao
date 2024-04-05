@@ -15,6 +15,6 @@ public class MoneyTest {
     @Test
     void 금액을_나누는_수는_0이_아님() {
         Money money = new Money(1_000);
-        assertThrows(IllegalArgumentException.class, () -> money.divide(0));
+        assertThrows(IllegalArgumentException.class, () -> money.calculatePurchaseQuantity(new Money(0)));
     }
 }

@@ -17,19 +17,15 @@ public class Money {
         }
     }
 
-    public Money divide(int divisor) {
-        validateDivisor(divisor);
-        return new Money( this.value / divisor);
+    public Quantity calculatePurchaseQuantity(Money price) {
+        validatePurchasePrice(price);
+        return new Quantity( this.value / price.value);
     }
 
-    private void validateDivisor(int divisor) {
-        if (divisor == 0) {
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+    private void validatePurchasePrice(Money price) {
+        if (price.value == 0) {
+            throw new IllegalArgumentException("구매 금액은 0이 될 수 없습니다.");
         }
-    }
-
-    public long getValue() {
-        return value;
     }
 
     @Override

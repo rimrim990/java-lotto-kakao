@@ -6,20 +6,20 @@ import java.util.stream.LongStream;
 
 public class LottoStore {
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final Money LOTTO_PRICE = new Money(1000);
 
-    private final long lottoCount;
+    private final Quantity lottoCount;
 
     public LottoStore(Money money) {
-        this.lottoCount = money.divide(LOTTO_PRICE).getValue();
+        this.lottoCount = money.calculatePurchaseQuantity(LOTTO_PRICE);
     }
 
     public long getLottoCount() {
-        return lottoCount;
+        return lottoCount.getValue();
     }
 
     public List<LottoTicket> getLottoTickets(NumberGenerator numberGenerator) {
-        return LongStream.range(0, lottoCount)
+        return LongStream.range(0, lottoCount.getValue())
             .mapToObj(number -> new LottoTicket(numberGenerator.generateNumbers()))
             .collect(Collectors.toList());
     }
