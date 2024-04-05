@@ -42,13 +42,6 @@ public class LottoTicket {
         }
     }
 
-    public LottoTicket add(LottoTicket lottoTicket) {
-        List<Integer> lottoNumbers = Stream.concat(this.lottoNumbers.stream(), lottoTicket.lottoNumbers.stream())
-            .map(LottoNumber::getValue)
-            .collect(Collectors.toList());
-        return new LottoTicket(lottoNumbers);
-    }
-
     public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
