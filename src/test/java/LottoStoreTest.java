@@ -22,17 +22,10 @@ public class LottoStoreTest {
     @Test
     void 자동로또_발권() {
         LottoStore lottoStore = new LottoStore(new Money(1_000));
-        List<LottoTicket> lottoTickets = lottoStore.getLottoTickets(new MockNumberGeneratr());
+        List<LottoTicket> lottoTickets = lottoStore.getLottoTickets(
+            () -> List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTickets).hasSize(1);
         assertThat(lottoTickets.get(0).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-    }
-
-    private static class MockNumberGeneratr implements NumberGenerator {
-
-        @Override
-        public List<Integer> generateNumbers() {
-            return List.of(1, 2, 3, 4, 5, 6);
-        }
     }
 }
