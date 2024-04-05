@@ -17,6 +17,11 @@ public class Money {
         }
     }
 
+    public Money buy(Money price, Quantity quantity) {
+        long used = price.value * quantity.getValue();
+        return new Money(this.value - used);
+    }
+
     public Quantity calculatePurchaseQuantity(Money price) {
         validatePurchasePrice(price);
         return new Quantity( this.value / price.value);

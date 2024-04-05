@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicket {
 
@@ -39,6 +40,13 @@ public class LottoTicket {
         if (numbers.size() != distinctNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
+    }
+
+    public LottoTicket add(LottoTicket lottoTicket) {
+        List<Integer> lottoNumbers = Stream.concat(this.lottoNumbers.stream(), lottoTicket.lottoNumbers.stream())
+            .map(LottoNumber::getValue)
+            .collect(Collectors.toList());
+        return new LottoTicket(lottoNumbers);
     }
 
     public boolean contains(LottoNumber number) {

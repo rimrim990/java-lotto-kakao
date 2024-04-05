@@ -11,20 +11,26 @@ import org.junit.jupiter.api.Test;
 public class LottoStoreTest {
 
     @Test
-    void 로또_발권() {
-        LottoStore lottoStore = new LottoStore(new Money(14_000));
-
-        assertThat(lottoStore.getLottoCount()).isEqualTo(14);
-        assertThat(lottoStore.generateAutoLottos(new LottoNumberGenerator())).hasSize(14);
-    }
-
-    @Test
     void 자동로또_발권() {
         LottoStore lottoStore = new LottoStore(new Money(1_000));
-        List<LottoTicket> lottoTickets = lottoStore.generateAutoLottos(
-            () -> List.of(1, 2, 3, 4, 5, 6));
+
+        lottoStore.buyAutoLottos(() -> List.of(1, 2, 3, 4, 5, 6));
+        List<LottoTicket> lottoTickets = lottoStore.getLottos();
 
         assertThat(lottoTickets).hasSize(1);
         assertThat(lottoTickets.get(0).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @Test
+    void 수동로또_발권() {
+        LottoStore lottoStore = new LottoStore(new Money(2_000));
+
+        lottoStore.buyManualLottos(List.of("1, 2, 3, 4, 5, 6"));
+        lottoStore.buyAutoLottos(() -> List.of(1, 2, 3, 4, 5, 6));
+        List<LottoTicket> lottoTickets = lottoStore.getLottos();
+
+        assertThat(lottoTickets).hasSize(2);
+        assertThat(lottoTickets.get(0).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lottoTickets.get(1).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }
