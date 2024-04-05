@@ -17,8 +17,19 @@ public class Money {
         }
     }
 
-    public double divide(int divisor) {
-        return (double) this.value / divisor;
+    public Money divide(int divisor) {
+        validateDivisor(divisor);
+        return new Money( this.value / divisor);
+    }
+
+    private void validateDivisor(int divisor) {
+        if (divisor == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+    }
+
+    public long getValue() {
+        return value;
     }
 
     @Override

@@ -3,7 +3,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.LottoStore;
 import domain.LottoTicket;
 import domain.Money;
-import domain.NumberGenerator;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -13,7 +13,7 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printLottoCount(int count) {
+    public void printLottoCount(long count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
