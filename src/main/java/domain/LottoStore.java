@@ -25,27 +25,23 @@ public class LottoStore {
         return autoLottos.size();
     }
 
-    public List<LottoTicket> getLottos() {
-        List<LottoTicket> lottos = new ArrayList<>(this.manualLottos);
-        lottos.addAll(this.autoLottos);
-        return lottos;
-    }
-
-    public void buyAutoLottos(NumberGenerator numberGenerator) {
+    public List<LottoTicket> buyAutoLottos(NumberGenerator numberGenerator) {
         Quantity availableAutoLottoCount = availableMoney.calculatePurchaseQuantity(LOTTO_PRICE);
         List<LottoTicket> autoLottos = LongStream.range(0, availableAutoLottoCount.getValue())
             .mapToObj(number -> new LottoTicket(numberGenerator.generateNumbers()))
             .collect(Collectors.toList());
 
         this.autoLottos.addAll(autoLottos);
+        return new ArrayList<>(autoLottos);
     }
 
-    public void buyManualLottos(List<String> manualLottoNumbers) {
+    public List<LottoTicket> buyManualLottos(List<String> manualLottoNumbers) {
         List<LottoTicket> manualLottos = manualLottoNumbers.stream()
             .map(LottoTicket::new)
             .collect(Collectors.toList());
 
         this.availableMoney = availableMoney.buy(LOTTO_PRICE, new Quantity(manualLottos.size()));
         this.manualLottos.addAll(manualLottos);
+        return new ArrayList<>(manualLottos);
     }
 }
