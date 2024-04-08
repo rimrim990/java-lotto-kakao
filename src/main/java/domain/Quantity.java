@@ -6,7 +6,6 @@ public class Quantity {
 
     private final long value;
 
-
     public Quantity(long value) {
         validateRange(value);
         this.value = value;
