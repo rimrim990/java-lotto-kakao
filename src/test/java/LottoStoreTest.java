@@ -1,4 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import domain.LottoStore;
 import domain.LottoTicket;
@@ -29,8 +30,11 @@ public class LottoStoreTest {
         lottoStore.buyAutoLottos(() -> List.of(1, 2, 3, 4, 5, 6));
         List<LottoTicket> lottoTickets = lottoStore.getLottos();
 
-        assertThat(lottoTickets).hasSize(2);
-        assertThat(lottoTickets.get(0).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(lottoTickets.get(1).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertAll(
+            () -> assertThat(lottoTickets).hasSize(2),
+            () -> assertThat(lottoTickets.get(0).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6),
+            () -> assertThat(lottoTickets.get(1).getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6)
+        );
+
     }
 }
