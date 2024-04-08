@@ -6,6 +6,10 @@ public class Quantity {
 
     private final long value;
 
+    public static Quantity subtract(long dividnd, long divisor) {
+        return new Quantity(dividnd / divisor);
+    }
+
     public Quantity(long value) {
         validateRange(value);
         this.value = value;

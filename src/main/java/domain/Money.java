@@ -32,7 +32,7 @@ public class Money {
 
     public Quantity calculatePurchaseQuantity(Money price) {
         validatePurchasePrice(price);
-        return new Quantity( this.value / price.value);
+        return Quantity.subtract(this.value, price.value);
     }
 
     private void validatePurchasePrice(Money price) {
