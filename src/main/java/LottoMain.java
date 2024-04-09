@@ -1,4 +1,5 @@
 import domain.LottoGame;
+import domain.LottoPair;
 import domain.LottoStore;
 import domain.LottoTicket;
 import domain.Money;
@@ -16,9 +17,9 @@ public class LottoMain {
     private static final OutputView outputView = new OutputView();
 
     public static void main(String[] args) {
-        List<LottoTicket> lottoTickets = buyLottos();
+        LottoPair lottoTickets = buyLottos();
         outputView.printUserLottos(
-            lottoTickets.stream()
+            lottoTickets.getLottoTickets().stream()
                 .map(LottoTicket::getLottoNumbers)
                 .collect(Collectors.toList())
         );
@@ -32,19 +33,16 @@ public class LottoMain {
         noticeResult(winningLotto, lottoTickets);
     }
 
-    private static List<LottoTicket> buyLottos() {
+    private static LottoPair buyLottos() {
         outputView.printGameGuide();
         Money money = new Money(inputView.inputInt());
         inputView.inputString();
 
         LottoStore lottoStore = new LottoStore(money);
-        List<LottoTicket> manualLottos = buyManualLottos(lottoStore);
+        LottoPair lottoPair = new LottoPair(buyManualLottos(lottoStore), lottoStore.buyAutoLottos(new LottoNumberGenerator()));
+        outputView.printLottoCount(lottoPair.getManualLottoSize(), lottoPair.getAutoLottoSize());
 
-        List<LottoTicket> autoLottos = lottoStore.buyAutoLottos(new LottoNumberGenerator());
-        outputView.printLottoCount(lottoStore.getManualLottoCount(), lottoStore.getAutoLottoCount());
-
-        manualLottos.addAll(autoLottos);
-        return manualLottos;
+        return lottoPair;
     }
 
     private static List<LottoTicket> buyManualLottos(LottoStore lottoStore) {
@@ -60,8 +58,8 @@ public class LottoMain {
         return lottoStore.buyManualLottos(manualLottoNumbers);
     }
 
-    private static void noticeResult(WinningLotto winningLotto, List<LottoTicket> lottoTickets) {
-        LottoGame lottoGame = new LottoGame(winningLotto, lottoTickets);
+    private static void noticeResult(WinningLotto winningLotto, LottoPair lottoPair) {
+        LottoGame lottoGame = new LottoGame(winningLotto, lottoPair);
         outputView.printStatistics(lottoGame.getRank());
         outputView.printRevenue(lottoGame.calculateRevenue());
     }

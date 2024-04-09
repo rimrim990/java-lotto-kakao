@@ -30,6 +30,10 @@ public class Money {
         }
     }
 
+    public boolean isLessThan(Money other) {
+        return this.value < other.value;
+    }
+
     public Quantity calculatePurchaseQuantity(Money price) {
         validatePurchasePrice(price);
         return Quantity.subtract(this.value, price.value);
@@ -39,6 +43,10 @@ public class Money {
         if (price.value == 0) {
             throw new IllegalArgumentException("구매 금액은 0이 될 수 없습니다.");
         }
+    }
+
+    public Money multiply(int number) {
+        return new Money(this.value * number);
     }
 
     @Override
