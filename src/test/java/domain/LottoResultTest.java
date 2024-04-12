@@ -31,10 +31,12 @@ public class LottoResultTest {
 
     @Test
     void 로또번호_수익률() {
-        List<LottoTicket> manualLottos =  List.of(new LottoTicket(List.of(1, 2, 3, 7, 9, 8)));
-        List<LottoTicket> autoLottos = List.of(new LottoTicket(List.of(11, 12, 13, 14, 17, 18)));
+        List<LottoTicket> lottoTickets = List.of(
+            new LottoTicket(List.of(11, 12, 13, 14, 15, 16)),
+            new LottoTicket(List.of(1, 2, 3, 7, 8, 9))
+        );
 
-        LottoGame lottoGame = new LottoGame(winningLotto, new LottoPair(manualLottos, autoLottos));
+        LottoGame lottoGame = new LottoGame(winningLotto, lottoTickets);
         float result = lottoGame.calculateRevenue();
 
         assertThat(result).isCloseTo(2.5f, within(0.5f));
