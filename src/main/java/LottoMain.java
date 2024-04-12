@@ -38,16 +38,15 @@ public class LottoMain {
         inputView.inputString();
 
         LottoStore lottoStore = new LottoStore(money);
-        List<LottoTicket> manualLottos = buyManualLottos(lottoStore);
+        buyManualLottos(lottoStore);
 
-        List<LottoTicket> autoLottos = lottoStore.buyAutoLottos(new LottoNumberGenerator());
+        lottoStore.buyAutoLottos(new LottoNumberGenerator());
         outputView.printLottoCount(lottoStore.getManualLottoCount(), lottoStore.getAutoLottoCount());
 
-        manualLottos.addAll(autoLottos);
-        return manualLottos;
+        return lottoStore.getLottos();
     }
 
-    private static List<LottoTicket> buyManualLottos(LottoStore lottoStore) {
+    private static void buyManualLottos(LottoStore lottoStore) {
         outputView.printManualLottoCount();
         Quantity manualLottoCount = new Quantity(inputView.inputInt());
         inputView.inputString();
@@ -57,7 +56,7 @@ public class LottoMain {
             .mapToObj(value -> inputView.inputString())
             .collect(Collectors.toList());
 
-        return lottoStore.buyManualLottos(manualLottoNumbers);
+        lottoStore.buyManualLottos(manualLottoNumbers);
     }
 
     private static void noticeResult(WinningLotto winningLotto, List<LottoTicket> lottoTickets) {
